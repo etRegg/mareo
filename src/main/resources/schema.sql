@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS Customer;
-CREATE TABLE Customer (
+DROP TABLE IF EXISTS customer;
+CREATE TABLE customer (
     id int,
     first_name varchar(255),
     last_name varchar(255),
@@ -7,15 +7,15 @@ CREATE TABLE Customer (
     city varchar(255)
 );
 
-DROP TABLE IF EXISTS Product;
-CREATE TABLE Product (
+DROP TABLE IF EXISTS product;
+CREATE TABLE product (
     id int,
     description varchar(255),
     weight double
 );
 
-DROP TABLE IF EXISTS Shipping;
-CREATE TABLE Shipping (
+DROP TABLE IF EXISTS shipping;
+CREATE TABLE shipping (
     id int,
     customer_id int,
     state varchar(255),
@@ -24,8 +24,8 @@ CREATE TABLE Shipping (
     priority int
 );
 
-DROP TABLE IF EXISTS Shipping_item;
-CREATE TABLE Shipping_item (
+DROP TABLE IF EXISTS shipping_item;
+CREATE TABLE shipping_item (
     id int,
     shipping_id int,
     product_id int,

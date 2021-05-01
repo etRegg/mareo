@@ -5,10 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "Shipping")
 public class Shipping {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +26,10 @@ public class Shipping {
 	private String state;
 
 	@Column(name = "send_date")
-	private String sendDate;
+	private Timestamp sendLocalDate;
 
 	@Column(name = "arrive_date")
-	private String arriveDate;
+	private Timestamp arriveLocalDate;
 
 	@Column(name = "priority")
 	private Integer priority;
@@ -54,21 +58,7 @@ public class Shipping {
 		this.state = state;
 	}
 
-	public String getSendDate() {
-		return sendDate;
-	}
-
-	public void setSendDate(String sendDate) {
-		this.sendDate = sendDate;
-	}
-
-	public String getArriveDate() {
-		return arriveDate;
-	}
-
-	public void setArriveDate(String arriveDate) {
-		this.arriveDate = arriveDate;
-	}
+	
 
 	public Integer getPriority() {
 		return priority;
@@ -78,4 +68,21 @@ public class Shipping {
 		this.priority = priority;
 	}
 
+	public Timestamp getSendLocalDate() {
+		return sendLocalDate;
+	}
+
+	public void setSendLocalDate(Timestamp sendLocalDate) {
+		this.sendLocalDate = sendLocalDate;
+	}
+
+	public Timestamp getArriveLocalDate() {
+		return arriveLocalDate;
+	}
+
+	public void setArriveLocalDate(Timestamp arriveLocalDate) {
+		this.arriveLocalDate = arriveLocalDate;
+	}
+
+	
 }
