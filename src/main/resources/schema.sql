@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS customer;
+/*DROP TABLE IF EXISTS customer;
 CREATE TABLE customer (
     id int,
     first_name varchar(255),
@@ -30,4 +30,4 @@ CREATE TABLE shipping_item (
     shipping_id int,
     product_id int,
     product_count int
-);
+);*/

@@ -4,12 +4,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import java.util.List;
+
 import javax.persistence.Column;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity 
 @Table(name = "Customer")
-public class Customer {
+public class Customer implements Comparable<Customer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -66,4 +70,23 @@ public class Customer {
 
 	@Column(name = "city")
 	private String city;
+	
+	@OneToMany(mappedBy = "customer")
+	private List<Shipping> shippend;
+	
+	public Integer getCount() {
+		return this.getShipped().size();
+	}
+	
+    private List<Shipping> getShipped() {
+    	return this.shippend;
+    }
+
+
+	@Override
+	public int compareTo(Customer o) {
+		
+		return (o.getCount() - this.shippend.size());
+	}
+	
 }

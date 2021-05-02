@@ -4,8 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+import java.util.List;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -19,9 +23,11 @@ public class Shipping {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "customer_id")
-	private String customer;
-
+	//Column(name = "customer_id")
+	@ManyToOne
+	private Customer customer;
+	@OneToMany(mappedBy = "shipping")
+	private List<ShippingItem> shippend;
 	@Column(name = "state")
 	private String state;
 
@@ -34,6 +40,8 @@ public class Shipping {
 	@Column(name = "priority")
 	private Integer priority;
 
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -42,11 +50,11 @@ public class Shipping {
 		this.id = id;
 	}
 
-	public String getCustomer() {
+	public Customer getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(String customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
@@ -57,8 +65,6 @@ public class Shipping {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	
 
 	public Integer getPriority() {
 		return priority;
@@ -84,5 +90,4 @@ public class Shipping {
 		this.arriveLocalDate = arriveLocalDate;
 	}
 
-	
 }

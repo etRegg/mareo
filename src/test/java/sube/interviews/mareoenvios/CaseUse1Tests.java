@@ -1,56 +1,52 @@
 package sube.interviews.mareoenvios;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.DataSourceInitializer;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
-import antlr.collections.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
+import javax.sql.DataSource;
 
-@SpringBootTest
-@Sql({"/schema.sql", "/data.sql"})
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class CaseUse1Tests {
+
 	
-	  @Autowired
-	  private CustomerRepository customer;
-	  
-	  @Autowired
-	  private ProductRepository productos;
-	  
-	  @Autowired
-	  private ShippingRepository shipping;
-	  
-	  @Autowired
-	  private ShippingItemRepository item;
-	  @Test
-	  void test1() {
+	
+	@LocalServerPort
+	private int port;
 
-		        assertEquals(3,((ArrayList<Customer>) customer.findAll()).toArray().length);
-		  
-	  }
-	  @Test
-	  void test2() {
+	@Autowired
+	private TestRestTemplate restTemplate;
 
-		        assertEquals(15,((ArrayList<Product>) productos.findAll()).toArray().length);
-		  
-	  }
-	  @Test
-	  void test3() {
-
-		        assertEquals(4,((ArrayList<Shipping>) shipping.findAll()).toArray().length);
-		  
-
-	  }
-	  @Test
-	  void test4() {
-
-		        assertEquals(9,((ArrayList<ShippingItem>) item.findAll()).toArray().length);
-		  
-	  }
+	@Test
+	public void test1Message() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/customer/info/1",
+				String.class)).contains("{\"status\":200,\"data\":{\"id\":1,\"address\":\"la buena direccion 123\",\"city\":\"CABA\",");
+	}
+	@Test
+	public void test2Message() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/customer/info/34",
+				String.class)).contains("{\"status\":404,\"data\":null}");
+	}
+	@Test
+	public void test3Message() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/shipping/info/34",
+				String.class)).contains("{\"status\":404,\"data\":null}");
+	}
+	@Test
+	public void test4Message() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/shipping/info/1",
+				String.class)).contains("{\"status\":200,\"data\":{\"id\":1,\"customer\":{\"id\":1,\"address\":\"la buena direccion 123\",\"city\":\"CABA\",");
+	}
 }
+

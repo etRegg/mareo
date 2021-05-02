@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
@@ -15,43 +16,11 @@ public class ShippingItem {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "shipping_id")
-	private Integer shipping;
+	@ManyToOne
+	private Shipping shipping;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getShipping() {
-		return shipping;
-	}
-
-	public void setShipping(Integer shipping) {
-		this.shipping = shipping;
-	}
-
-	public Integer getProduct() {
-		return product;
-	}
-
-	public void setProduct(Integer product) {
-		this.product = product;
-	}
-
-	public Integer getProductCount() {
-		return productCount;
-	}
-
-	public void setProductCount(Integer productCount) {
-		this.productCount = productCount;
-	}
-
-	@Column(name = "product_id")
-	private Integer product;
+	@ManyToOne
+	private Product product;
 
 	@Column(name = "product_count")
 	private Integer productCount;
