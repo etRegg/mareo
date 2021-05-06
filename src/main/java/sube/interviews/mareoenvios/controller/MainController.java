@@ -1,4 +1,4 @@
-package sube.interviews.mareoenvios;
+package sube.interviews.mareoenvios.controller;
 
 
 import java.util.ArrayList;
@@ -14,6 +14,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import sube.interviews.mareoenvios.entity.Customer;
+import sube.interviews.mareoenvios.entity.Shipping;
+import sube.interviews.mareoenvios.repository.CustomerRepository;
+import sube.interviews.mareoenvios.repository.ShippingRepository;
+import sube.interviews.mareoenvios.response.CustomResponse;
 
 @RestController
 public class MainController {

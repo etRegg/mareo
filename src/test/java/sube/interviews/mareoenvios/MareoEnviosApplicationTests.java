@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import sube.interviews.mareoenvios.entity.Customer;
+import sube.interviews.mareoenvios.entity.Product;
+import sube.interviews.mareoenvios.entity.Shipping;
+import sube.interviews.mareoenvios.entity.ShippingItem;
+
 @SpringBootTest
 class MareoEnviosApplicationTests {
 
@@ -15,8 +20,8 @@ class MareoEnviosApplicationTests {
 		Class<?> clazz = goat.getClass();
 		
 		assertEquals("Customer", clazz.getSimpleName());
-		assertEquals("sube.interviews.mareoenvios.Customer", clazz.getName());
-		assertEquals("sube.interviews.mareoenvios.Customer", clazz.getCanonicalName());
+		assertEquals("sube.interviews.mareoenvios.entity.Customer", clazz.getName());
+		assertEquals("sube.interviews.mareoenvios.entity.Customer", clazz.getCanonicalName());
     }
 
 	@Test
@@ -26,8 +31,8 @@ class MareoEnviosApplicationTests {
 		Class<?> clazz = goat.getClass();
 		
 		assertEquals("Product", clazz.getSimpleName());
-		assertEquals("sube.interviews.mareoenvios.Product", clazz.getName());
-		assertEquals("sube.interviews.mareoenvios.Product", clazz.getCanonicalName());
+		assertEquals("sube.interviews.mareoenvios.entity.Product", clazz.getName());
+		assertEquals("sube.interviews.mareoenvios.entity.Product", clazz.getCanonicalName());
     }
 	
 
@@ -38,8 +43,8 @@ class MareoEnviosApplicationTests {
 		Class<?> clazz = goat.getClass();
 		
 		assertEquals("Shipping", clazz.getSimpleName());
-		assertEquals("sube.interviews.mareoenvios.Shipping", clazz.getName());
-		assertEquals("sube.interviews.mareoenvios.Shipping", clazz.getCanonicalName());
+		assertEquals("sube.interviews.mareoenvios.entity.Shipping", clazz.getName());
+		assertEquals("sube.interviews.mareoenvios.entity.Shipping", clazz.getCanonicalName());
     }
 	
 	
@@ -51,8 +56,8 @@ class MareoEnviosApplicationTests {
 		Class<?> clazz = goat.getClass();
 		
 		assertEquals("ShippingItem", clazz.getSimpleName());
-		assertEquals("sube.interviews.mareoenvios.ShippingItem", clazz.getName());
-		assertEquals("sube.interviews.mareoenvios.ShippingItem", clazz.getCanonicalName());
+		assertEquals("sube.interviews.mareoenvios.entity.ShippingItem", clazz.getName());
+		assertEquals("sube.interviews.mareoenvios.entity.ShippingItem", clazz.getCanonicalName());
     }
 	
 	
@@ -64,8 +69,8 @@ class MareoEnviosApplicationTests {
 		Class<?> clazz = goat.getClass();
 		
 		assertEquals("Customer", clazz.getSimpleName());
-		assertEquals("sube.interviews.mareoenvios.Customer", clazz.getName());
-		assertEquals("sube.interviews.mareoenvios.Customer", clazz.getCanonicalName());
+		assertEquals("sube.interviews.mareoenvios.entity.Customer", clazz.getName());
+		assertEquals("sube.interviews.mareoenvios.entity.Customer", clazz.getCanonicalName());
     }
 	
 }

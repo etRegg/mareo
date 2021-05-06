@@ -1,4 +1,4 @@
-package sube.interviews.mareoenvios;
+package sube.interviews.mareoenvios.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 import java.util.List;
 import java.sql.Date;

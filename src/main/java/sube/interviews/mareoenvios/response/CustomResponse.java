@@ -1,4 +1,4 @@
-package sube.interviews.mareoenvios;
+package sube.interviews.mareoenvios.response;
 
 public class CustomResponse {
 	public int status;
