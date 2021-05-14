@@ -34,7 +34,7 @@ public class MainController {
 	private CustomerRepository customer;
 
 	@GetMapping("/customer/info/{customerId}")
-	ResponseEntity<CustomResponse> getCustomer(@PathVariable Integer customerId) {
+	public ResponseEntity<CustomResponse> getCustomer(@PathVariable Integer customerId) {
 		 CustomResponse custom = new CustomResponse();
 		   try{
 			   Customer	result = this.repository.findById(customerId).orElseThrow(() -> new RuntimeException("No existe entidad"));
