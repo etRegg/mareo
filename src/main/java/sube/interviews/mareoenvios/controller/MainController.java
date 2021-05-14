@@ -1,9 +1,7 @@
 package sube.interviews.mareoenvios.controller;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -15,73 +13,75 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import sube.interviews.mareoenvios.entity.Customer;
-import sube.interviews.mareoenvios.entity.Shipping;
-import sube.interviews.mareoenvios.repository.CustomerRepository;
-import sube.interviews.mareoenvios.repository.ShippingRepository;
 import sube.interviews.mareoenvios.response.CustomResponse;
+import sube.interviews.mareoenvios.services.MareoService;
 
 @RestController
 public class MainController {
 	
 	@Autowired
-	private CustomerRepository  repository;
-	
-	@Autowired
-	private ShippingRepository shippingrepo;
-	
-	@Autowired
-	private CustomerRepository customer;
-
+	private MareoService servicio;
 	@GetMapping("/customer/info/{customerId}")
 	public ResponseEntity<CustomResponse> getCustomer(@PathVariable Integer customerId) {
 		 CustomResponse custom = new CustomResponse();
 		   try{
-			   Customer	result = this.repository.findById(customerId).orElseThrow(() -> new RuntimeException("No existe entidad"));
-			   custom.status= 200;
-			   custom.data = result;
-			   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
+			   return this.servicio.customer(customerId, custom);
 		   }catch(Exception e) {
-			   custom.status= 404;
-		       custom.data = null;
-			 
-			   return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(custom);   
+			   return common404(custom);   
 		   }			
+	}
+
+	/**
+	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#costomer(sube.interviews.mareoenvios.controller.MainController,Integer,CustomResponse)} instead
+	 */
+	private ResponseEntity<CustomResponse> customer(Integer customerId, CustomResponse custom) {
+		return this.servicio.customer(customerId, custom);
+	}
+	/**
+	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#report(sube.interviews.mareoenvios.controller.MainController,CustomResponse)} instead
+	 */
+	private ResponseEntity<CustomResponse> report(CustomResponse custom) {
+		return servicio.report(this, custom);
+	}
+	/**
+	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#shiped(sube.interviews.mareoenvios.controller.MainController,Integer,CustomResponse)} instead
+	 */
+	private ResponseEntity<CustomResponse> shiped(Integer shippingId, CustomResponse custom) {
+		return servicio.shiped(this, shippingId, custom);
 	}
 	
 	@GetMapping("/shipping/info/{shippingId}")
 	public ResponseEntity<CustomResponse> getShipping(@PathVariable Integer shippingId)  {
 	   CustomResponse custom = new CustomResponse();
 	   try{
-		   Shipping	result = this.shippingrepo.findById(shippingId).orElseThrow(() -> new RuntimeException("No existe entidad"));
-		   custom.status= 200;
-		   custom.data = result;
-		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
+		   return shiped(shippingId, custom);
 	   }catch(Exception e) {
-		   custom.status= 404;
-	       custom.data = null;
-		 
-	       return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(custom);  
+		   return common404(custom);  
 	   }
 	}
+
+
 	
 	
 	@GetMapping("/reports/topSended")
 	public ResponseEntity<CustomResponse>  getReport()  {
 	   CustomResponse custom = new CustomResponse();
 	   try{
-		   List<Customer> retorno = new ArrayList<Customer>();
-		   Iterable<Customer>	result = this.customer.findAll();
-		   result.forEach((Customer sp)->retorno.add(sp));
-	       custom.status= 200;
-		   custom.data = retorno.stream().sorted();
-		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
+		   return report(custom);
 	   }catch(Exception e) {
-		   custom.status= 404;
-	       custom.data = null;
-		 
-	       return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(custom);  
+		   return common404(custom);  
 	   }
 	}
+
+
+	private ResponseEntity<CustomResponse> common404(CustomResponse custom) {
+		custom.status= 404;
+	       custom.data = null;
+		 
+	       return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(custom);
+	}
+
+
+	
 	
 }
