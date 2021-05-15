@@ -38,16 +38,16 @@ public class MainController {
 		return this.servicio.customer(customerId, custom);
 	}
 	/**
-	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#report(sube.interviews.mareoenvios.controller.MainController,CustomResponse)} instead
+	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#report(CustomResponse)} instead
 	 */
 	private ResponseEntity<CustomResponse> report(CustomResponse custom) {
-		return servicio.report(this, custom);
+		return servicio.report( custom);
 	}
 	/**
-	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#shiped(sube.interviews.mareoenvios.controller.MainController,Integer,CustomResponse)} instead
+	 * @deprecated Use {@link sube.interviews.mareoenvios.services.MareoService#shiped(Integer,CustomResponse)} instead
 	 */
 	private ResponseEntity<CustomResponse> shiped(Integer shippingId, CustomResponse custom) {
-		return servicio.shiped(this, shippingId, custom);
+		return servicio.shiped( shippingId, custom);
 	}
 	
 	@GetMapping("/shipping/info/{shippingId}")
@@ -62,9 +62,22 @@ public class MainController {
 
 
 	
-	
-	@GetMapping("/reports/topSended")
+	/**
+	 * @deprecated
+	 * @return
+	 */
+	@GetMapping("/v1/reports/topSended/")
 	public ResponseEntity<CustomResponse>  getReport()  {
+	   CustomResponse custom = new CustomResponse();
+	   try{
+		   return report(custom);
+	   }catch(Exception e) {
+		   return common404(custom);  
+	   }
+	}
+
+	@GetMapping("/reports/topSended/")
+	public ResponseEntity<CustomResponse>  getReportv2()  {
 	   CustomResponse custom = new CustomResponse();
 	   try{
 		   return report(custom);

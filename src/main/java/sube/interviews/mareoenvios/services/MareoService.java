@@ -26,7 +26,7 @@ public class MareoService {
 	@Autowired
 	private CustomerRepository customer;
 	
-	public ResponseEntity<CustomResponse> shiped(MainController mainController, Integer shippingId, CustomResponse custom) {
+	public ResponseEntity<CustomResponse> shiped( Integer shippingId, CustomResponse custom) {
 		Shipping	result = this.shippingrepo.findById(shippingId).orElseThrow(() -> new RuntimeException("No existe entidad"));
 		   custom.status= 200;
 		   custom.data = result;
@@ -38,12 +38,21 @@ public class MareoService {
 		   custom.data = result;
 		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
 	}
-	public ResponseEntity<CustomResponse> report(MainController mainController, CustomResponse custom) {
+	public ResponseEntity<CustomResponse> report(CustomResponse custom) {
 		   List<Customer> retorno = new ArrayList<Customer>();
 		   Iterable<Customer>	result = customer.findAll();
 		   result.forEach((Customer sp)->retorno.add(sp));
 	       custom.status= 200;
 		   custom.data = retorno.stream().sorted();
+		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
+	}
+	
+	public ResponseEntity<CustomResponse> reportv2(CustomResponse custom) {
+		   List<Customer> retorno = new ArrayList<Customer>();
+		   Iterable<Customer>	result = customer.findAll();
+		   result.forEach((Customer sp)->retorno.add(sp));
+	       custom.status= 200;
+		   custom.data = retorno.stream().filter( t-> t.getSuccess() >0).sorted();
 		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
 	}
 	

@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.persistence.Column;
 
@@ -86,7 +87,10 @@ public class Customer implements Comparable<Customer> {
 	@Override
 	public int compareTo(Customer o) {
 		
-		return (o.getCount() - this.shippend.size());
+		return (o.getSuccess() - this.getSuccess());
 	}
 	
+	public int getSuccess() {
+		return (int)this.shippend.stream().filter(s -> s.isSuccess()).count();
+	}
 }

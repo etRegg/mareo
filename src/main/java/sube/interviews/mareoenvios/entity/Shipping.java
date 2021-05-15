@@ -69,6 +69,10 @@ public class Shipping {
 		return priority;
 	}
 
+	public boolean isSuccess() {
+		return true;
+	}
+	
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
