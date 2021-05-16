@@ -70,7 +70,7 @@ public class Shipping {
 	}
 
 	public boolean isSuccess() {
-		return true;
+		return this.state.equals("Entregado");
 	}
 	
 	public void setPriority(Integer priority) {

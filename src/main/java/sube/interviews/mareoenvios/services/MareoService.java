@@ -39,20 +39,20 @@ public class MareoService {
 		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
 	}
 	public ResponseEntity<CustomResponse> report(CustomResponse custom) {
-		   List<Customer> retorno = new ArrayList<Customer>();
+		 
 		   Iterable<Customer>	result = customer.findAll();
-		   result.forEach((Customer sp)->retorno.add(sp));
+		  
 	       custom.status= 200;
-		   custom.data = retorno.stream().sorted();
+		   custom.data = ((List<Customer>)result).stream().sorted();
 		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
 	}
 	
 	public ResponseEntity<CustomResponse> reportv2(CustomResponse custom) {
-		   List<Customer> retorno = new ArrayList<Customer>();
+		 
 		   Iterable<Customer>	result = customer.findAll();
-		   result.forEach((Customer sp)->retorno.add(sp));
+		 
 	       custom.status= 200;
-		   custom.data = retorno.stream().filter( t-> t.getSuccess() >0).sorted();
+		   custom.data = ((List<Customer>)result).stream().filter( t-> t.getSuccess() >0).sorted();
 		   return ResponseEntity.status(HttpStatus.ACCEPTED).body(custom);
 	}
 	
